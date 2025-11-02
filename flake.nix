@@ -18,6 +18,7 @@
         devShells.default = pkgs.mkShell {
           buildInputs = with pkgs; [
             php84.unwrapped
+            php84Packages.composer
             php84Extensions.opcache
             autoconf
             automake

@@ -1,7 +1,7 @@
 {
     "name": "tonybanters/zdump",
-    "description": "Beautiful debug output for PHP - C extension",
-    "type": "php-ext",
+    "description": "Quick and Painless Dump Extension for PHP",
+    "type": "library",
     "license": "PHP-3.01",
     "keywords": ["debug", "dump", "var_dump", "debugging", "development"],
     "authors": [
@@ -21,7 +21,7 @@
     "autoload": {},
     "scripts": {
         "post-install-cmd": [
-            "@php -r \"if (!extension_loaded('zdump')) { echo '\\n zdump extension not loaded. Please compile and install:\\n'; echo '  cd vendor/yourvendor/zdump && phpize && ./configure && make && sudo make install\\n'; echo '  Then add extension=zdump.so to your php.ini\\n\\n'; }\""
+            "@php -r \"if (!extension_loaded('zdump')) { echo '\\n zdump extension not loaded. Please compile and install:\\n'; echo '  cd vendor/tonybanters/zdump && phpize && ./configure && make && sudo make install\\n'; echo '  Then add extension=zdump.so to your php.ini\\n\\n'; }\""
         ]
     }
 }
