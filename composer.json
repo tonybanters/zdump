@@ -1,27 +1,36 @@
 {
-    "name": "tonybanters/zdump",
-    "description": "Quick and Painless Dump Extension for PHP",
-    "type": "library",
-    "license": "PHP-3.01",
-    "keywords": ["debug", "dump", "var_dump", "debugging", "development"],
-    "authors": [
-        {
-            "name": "Tony, btw",
-            "email": "tony@tonybtw.com"
-        }
+  "name": "tonybanters/zdump",
+  "description": "A Quick and Painless Dump Extension for PHP",
+  "type": "library",
+  "license": "PHP-3.01",
+  "keywords": ["debug", "dump", "var_dump", "debugging", "development"],
+  "authors": [
+    { "name": "Tony, btw", "email": "tony@tonybtw.com" }
+  ],
+  "require": {
+    "php": ">=8.0.0"
+  },
+  "suggest": {
+    "ext-zdump": "Loaded after build; 'php -m' should list zdump."
+  },
+  "autoload": {},
+  "scripts": {
+    "post-install-cmd": [
+      "@php -r \"echo \\\"\\n[zdump] Building native extension...\\n\\\";\"",
+      "phpize",
+      "./configure",
+      "make",
+      "@php -r \"echo \\\"[zdump] Attempting install to $(php-config --extension-dir) (may need sudo)\\n\\\";\"",
+      "sh -c 'dst=$(php-config --extension-dir); test -w \"$dst\" && install -m 0755 modules/zdump.so \"$dst\" || { echo \"[zdump] Extension dir not writable; run: sudo install -m 0755 modules/zdump.so $(php-config --extension-dir)\"; }'",
+      "@php -r \"echo \\\"[zdump] Enable with: extension=zdump.so (php.ini or conf.d)\\n\\\";\""
     ],
-    "require": {
-        "php": ">=8.0.0",
-        "ext-zdump": "*"
-    },
-    "extra": {
-        "compile": "phpize && ./configure && make && sudo make install",
-        "enable": "Add 'extension=zdump.so' to your php.ini"
-    },
-    "autoload": {},
-    "scripts": {
-        "post-install-cmd": [
-            "@php -r \"if (!extension_loaded('zdump')) { echo '\\n zdump extension not loaded. Please compile and install:\\n'; echo '  cd vendor/tonybanters/zdump && phpize && ./configure && make && sudo make install\\n'; echo '  Then add extension=zdump.so to your php.ini\\n\\n'; }\""
-        ]
-    }
+    "post-update-cmd": [
+      "phpize",
+      "./configure",
+      "make"
+    ]
+  },
+  "extra": {
+    "enable": "Add 'extension=zdump.so' to your php.ini (or conf.d/zdump.ini)."
+  }
 }
