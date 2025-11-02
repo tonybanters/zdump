@@ -17,7 +17,7 @@
       in {
         devShells.default = pkgs.mkShell {
           buildInputs = with pkgs; [
-            php84.unwrapped  # Use unwrapped to get phpize and php-config
+            php84.unwrapped
             php84Extensions.opcache
             autoconf
             automake
